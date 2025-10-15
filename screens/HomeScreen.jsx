@@ -5,12 +5,28 @@ import useStore from '../store/StoreContext';
 import { observer } from 'mobx-react-lite';
 import ScheduleItem from '../components/ScheduleItem';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
 
 const HomeScreen = () => {
   const { scheduleStore } = useStore();
+  const navigation = useNavigation();
 
   const renderItem = useCallback(({ item }) => (
-    <ScheduleItem companyName={item.companyName} logoUrl={item.logo} />
+    <ScheduleItem
+      companyName={item.companyName}
+      logoUrl={item.logo}
+      customerRating={item.customerRating}
+      dateStartByCity={item.dateStartByCity}
+      timeStartByCity={item.timeStartByCity}
+      timeEndByCity={item.timeEndByCity}
+      priceWorker={item.priceWorker}
+      currentWorkers={item.currentWorkers}
+      planWorkers={item.planWorkers}
+      workTypes={item.workTypes}
+      onPress={() => {
+        navigation.navigate('Schedule', { item });
+      }} 
+    />
   ),[scheduleStore.schedule]);
 
   return (
@@ -37,8 +53,6 @@ const styles = StyleSheet.create({
 
   },
   list: {
-    // flex: 1,
     paddingHorizontal:16,
-    // paddingVertical:8,
   }
 });

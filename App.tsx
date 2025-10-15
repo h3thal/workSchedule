@@ -18,8 +18,8 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Schedule" component={ScheduleScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} options={{title: 'Расписание'}} />
+        <Stack.Screen name="Schedule" component={ScheduleScreen} options={({route}) => ({title: route.params.item.companyName})} />
       </Stack.Navigator>
     </NavigationContainer>
   )
